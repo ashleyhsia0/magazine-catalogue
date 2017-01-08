@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Issue
  *
- * @ORM\Table(name="issue")
+ * @ORM\Table(name="issues")
  * @ORM\Entity(repositoryClass="Lynda\MagazineBundle\Repository\IssueRepository")
  */
 class Issue
@@ -46,7 +46,7 @@ class Issue
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +69,7 @@ class Issue
     /**
      * Get number
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumber()
     {
@@ -92,7 +92,7 @@ class Issue
     /**
      * Get datePublication
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDatePublication()
     {
@@ -115,7 +115,7 @@ class Issue
     /**
      * Get cover
      *
-     * @return string 
+     * @return string
      */
     public function getCover()
     {
