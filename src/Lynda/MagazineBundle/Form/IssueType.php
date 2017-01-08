@@ -13,9 +13,14 @@ class IssueType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('number')->add('datePublication')->add('cover')->add('publication')        ;
+        $builder
+            ->add('number')
+            ->add('datePublication')
+            ->add('cover')
+            ->add('publication')
+        ;
     }
-    
+
     /**
      * {@inheritdoc}
      */
