@@ -3,6 +3,7 @@
 namespace Lynda\MagazineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Publication
@@ -12,6 +13,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Publication
 {
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Issue", mappedBy="publication")
+     */
+    private $issues;
+
     /**
      * @var int
      *
@@ -28,6 +36,9 @@ class Publication
      */
     private $name;
 
+    public function __construct() {
+        $this->issues = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -60,5 +71,38 @@ class Publication
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add issues
+     *
+     * @param \Lynda\MagazineBundle\Entity\Issue $issues
+     * @return Publication
+     */
+    public function addIssue(\Lynda\MagazineBundle\Entity\Issue $issues)
+    {
+        $this->issues[] = $issues;
+
+        return $this;
+    }
+
+    /**
+     * Remove issues
+     *
+     * @param \Lynda\MagazineBundle\Entity\Issue $issues
+     */
+    public function removeIssue(\Lynda\MagazineBundle\Entity\Issue $issues)
+    {
+        $this->issues->removeElement($issues);
+    }
+
+    /**
+     * Get issues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getIssues()
+    {
+        return $this->issues;
     }
 }

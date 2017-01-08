@@ -3,6 +3,7 @@
 namespace Lynda\MagazineBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Issue
@@ -12,6 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Issue
 {
+    /**
+     * @var Publication
+     *
+     * @ORM\ManyToOne(targetEntity="Publication", inversedBy="issues")
+     * @ORM\JoinColumn(name="publication_id", referencedColumnName="id")
+     */
+    private $publication;
+
     /**
      * @var int
      *
@@ -120,5 +129,28 @@ class Issue
     public function getCover()
     {
         return $this->cover;
+    }
+
+    /**
+     * Set publication
+     *
+     * @param \Lynda\MagazineBundle\Entity\Publication $publication
+     * @return Issue
+     */
+    public function setPublication(\Lynda\MagazineBundle\Entity\Publication $publication = null)
+    {
+        $this->publication = $publication;
+
+        return $this;
+    }
+
+    /**
+     * Get publication
+     *
+     * @return \Lynda\MagazineBundle\Entity\Publication 
+     */
+    public function getPublication()
+    {
+        return $this->publication;
     }
 }
