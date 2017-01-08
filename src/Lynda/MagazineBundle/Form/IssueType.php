@@ -20,7 +20,7 @@ class IssueType extends AbstractType
                 'required' => true,
 
             ))
-            // ->add('cover')
+            ->add('file')
             ->add('publication', 'entity', array(
                 'required' => true,
                 'class' => 'LyndaMagazineBundle:Publication',
