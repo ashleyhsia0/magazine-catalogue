@@ -204,4 +204,51 @@ class Issue
                 ? NULL
                 : $this->getUploadAbsolutePath() . '/' . $this->getCover();
     }
+
+    /**
+     * @Assert\File(maxSize="1000000")
+     */
+    private $file;
+
+    /**
+     * Sets file.
+     *
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = NULL) {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile() {
+        return $this->file;
+    }
+
+    /**
+     * Upload a cover file. 
+     */
+    public function upload() {
+        // File property can be empty.
+        if (NULL === $this->getFile()) {
+            return;
+        }
+
+        $filename = $this->getFile()->getClientOriginalName();
+
+        // Move the uploaded file to target directory using original name.
+        $this->getFile()->move(
+            $this->getUploadAbsolutePath(),
+            $filename);
+
+        // Set the cover.
+        $this->setCover($filename);
+
+        // Cleanup.
+        $this->setFile();
+
+    }
 }
