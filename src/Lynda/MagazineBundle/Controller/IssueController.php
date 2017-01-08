@@ -44,6 +44,7 @@ class IssueController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $issue->upload();
             $em = $this->getDoctrine()->getManager();
             $em->persist($issue);
             $em->flush($issue);
@@ -86,6 +87,7 @@ class IssueController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $issue->upload();
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('issue_edit', array('id' => $issue->getId()));
