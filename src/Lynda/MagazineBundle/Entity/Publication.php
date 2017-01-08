@@ -99,10 +99,19 @@ class Publication
     /**
      * Get issues
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getIssues()
     {
         return $this->issues;
+    }
+
+    /**
+     * Render a Publication as a string
+     *
+     * @return string
+     */
+    public function __toString() {
+        return $this->getName();
     }
 }
