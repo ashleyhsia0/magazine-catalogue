@@ -5,6 +5,7 @@ namespace Lynda\MagazineBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Issue
@@ -158,5 +159,49 @@ class Issue
     public function getPublication()
     {
         return $this->publication;
+    }
+
+    /**
+     * Get web path to upload directory.
+     *
+     * @return string
+     *    Relative path.
+     */
+    protected function getUploadPath() {
+        return 'uploads/covers';
+    }
+
+    /**
+     * Get absolute path to upload directory.
+     *
+     * @return string
+     *    Absolute path.
+     */
+    protected function getUploadAbsolutePath() {
+        return __DIR__ . '/../../../../web/' . $this->getUploadPath();
+    }
+
+    /**
+     * Get web path to a cover.
+     *
+     * @return null|string
+     *    Relative path.
+     */
+    public function getCoverWeb() {
+        return NULL === $this->getCover()
+                ? NULL
+                : $this->getUploadPath() . '/' . $this->getCover();
+    }
+
+    /**
+     * Get path on disk to a cover.
+     *
+     * @return null|string
+     *    Absolute path.
+     */
+    public function getCoverAbsolute() {
+        return NULL === $this->getCover()
+                ? NULL
+                : $this->getUploadAbsolutePath() . '/' . $this->getCover();
     }
 }
